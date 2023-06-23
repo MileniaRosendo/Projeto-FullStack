@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Formulário de Cadastro de Usuário</title>
+</head>
+<body>
+  <h1>Formulário de Cadastro de Usuário</h1>
+
+  <form id="formulario" action="http://localhost:8080/api/v1/Usuarios" method="POST">
+    <label for="nome">Nome:</label>
+    <input type="text" id="nome" name="nome" required><br>
+
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required><br>
+
+    <label for="senha">Senha:</label>
+    <input type="password" id="senha" name="senha" required><br>
+
+    <input type="submit" value="Cadastrar">
+  </form>
+  <!-- <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script> -->
+  <script src="./index.js">
+  </script>
+  <script>
+    const formulario = document.getElementById('formulario'); 
+  const nomeInput = document.getElementById('nome');
+  const nomeString = nomeInput.value.toString();
+  const emailInput = document.getElementById('email');
+  const emailString = emailInput.value.toString();
+  const senhaInput = document.getElementById('senha');
+  const senhaString = senhaInput.value.toString();
+  const usuarioData = {
+    nome: nomeString,
+    email: emailString,
+    senha: senhaString
+  };
+formulario.addEventListener('submit', async (event) => {
+  event.preventDefault(); // Impede o envio do formulário por padrão
+  try {
+    const response = await axios.post('http://localhost:8080/api/v1/Usuarios', usuarioData);
+    console.log('Usuário criado:', response.data);
+    // Faça o que você precisa com a resposta do servidor
+  } catch (error) {
+    console.error(error);
+    // Lide com o erro de acordo com suas necessidades
+  }
+});
+  </script>
+</body>
+</html>
